@@ -34,7 +34,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 # Timezone info to satisfy Windows requirements
-gem 'tzinfo-data'
+gem 'tzinfo'
+gem 'tzinfo-data', platforms: [:x64_mingw,:mingw, :mswin]
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

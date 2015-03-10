@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Party:</strong>
+  <%= @pairing.party_id %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @pairing.value_id %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @pairing.position %>
+</p>
+
+<%= link_to 'Edit', edit_pairing_path(@pairing) %> |
+<%= link_to 'Back', pairings_path %>

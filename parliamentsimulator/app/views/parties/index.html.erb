@@ -4,8 +4,8 @@
     <tr>
       <% @parties.each do |party| %>
         <th>
-          <center><%= party.name %></center> 
-          <br> 
+          <center><%= party.name %></center>
+          <br>
           <%= image_tag party.picture,  height: '150', width: '150' %>
         </th>
     <% end %>
@@ -13,7 +13,7 @@
   </thead>
   <tbody>
     <% @parties.each do |party| %>
-      <td style="height: 200px;">Lorem ipsum</td>
+      <td class="dragme" style="height: 200px;">Lorem ipsum</td>
     <% end %>
   </tbody>
 </table>

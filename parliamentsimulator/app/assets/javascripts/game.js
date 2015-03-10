@@ -20,6 +20,7 @@ $(document).ready(function () {
         });
     };
 
+    $('.dragme').draggable();
 
     init();
 

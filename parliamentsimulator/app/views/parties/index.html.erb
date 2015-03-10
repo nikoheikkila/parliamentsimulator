@@ -7,6 +7,7 @@
     <tr>
       <th>Name</th>
       <th>Picture</th>
+      <th>Values</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= party.name %></td>
         <td><%= party.picture %></td>
+        <td><%= party.values %></td>
         <td><%= link_to 'Show', party %></td>
         <td><%= link_to 'Edit', edit_party_path(party) %></td>
         <td><%= link_to 'Destroy', party, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -15,6 +15,7 @@ class PartiesController < ApplicationController
   # GET /parties/new
   def new
     @party = Party.new
+    @values = Value.all
   end
 
   # GET /parties/1/edit

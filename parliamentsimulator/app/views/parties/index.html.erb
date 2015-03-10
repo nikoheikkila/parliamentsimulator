@@ -1,31 +1,19 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Listing Parties</h1>
-
-<table>
+<table style="border: 1px solid black;">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Picture</th>
-      <th>Values</th>
-      <th colspan="3"></th>
+      <% @parties.each do |party| %>
+        <th>
+          <center><%= party.name %></center> 
+          <br> 
+          <%= image_tag party.picture,  height: '150', width: '150' %>
+        </th>
+    <% end %>
     </tr>
   </thead>
-
   <tbody>
     <% @parties.each do |party| %>
-      <tr>
-        <td><%= party.name %></td>
-        <td><%= party.picture %></td>
-        <td><%= party.values %></td>
-        <td><%= link_to 'Show', party %></td>
-        <td><%= link_to 'Edit', edit_party_path(party) %></td>
-        <td><%= link_to 'Destroy', party, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <td style="height: 200px;">Lorem ipsum</td>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Party', new_party_path %>

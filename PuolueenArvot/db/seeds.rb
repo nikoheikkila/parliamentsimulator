@@ -30,5 +30,68 @@ values = Value.create([
 ])
 
 pairings = Pairing.create([
-	{ party_id: 1, value_id: 1, position:1}
+	# Keskusta
+	{ party_id: 1, value_id: 1, position: 0},
+	{ party_id: 1, value_id: 2, position: 1},
+	{ party_id: 1, value_id: 3, position: 1},
+	{ party_id: 1, value_id: 4, position: 1},
+	{ party_id: 1, value_id: 5, position: 0},
+	{ party_id: 1, value_id: 6, position: nil},
+	{ party_id: 1, value_id: 7, position: -1},
+	# Kokoomus
+	{ party_id: 2, value_id: 1, position: 1},
+	{ party_id: 2, value_id: 2, position: 1},
+	{ party_id: 2, value_id: 3, position: 1},
+	{ party_id: 2, value_id: 4, position: 1},
+	{ party_id: 2, value_id: 5, position: 1},
+	{ party_id: 2, value_id: 6, position: nil},
+	{ party_id: 2, value_id: 7, position: nil},
+	#SDP
+	{ party_id: 3, value_id: 1, position: -1},
+	{ party_id: 3, value_id: 2, position: 1},
+	{ party_id: 3, value_id: 3, position: 1},
+	{ party_id: 3, value_id: 4, position: 1},
+	{ party_id: 3, value_id: 5, position: 1},
+	{ party_id: 3, value_id: 6, position: 1},
+	{ party_id: 3, value_id: 7, position: -1},
+	#PerusS
+	{ party_id: 4, value_id: 1, position: 1},
+	{ party_id: 4, value_id: 2, position: -1},
+	{ party_id: 4, value_id: 3, position: 1},
+	{ party_id: 4, value_id: 4, position: 1},
+	{ party_id: 4, value_id: 5, position: -1},
+	{ party_id: 4, value_id: 6, position: nil},
+	{ party_id: 4, value_id: 7, position: nil},
+	#Vasemmisto
+	{ party_id: 5, value_id: 1, position: -1},
+	{ party_id: 5, value_id: 2, position: 1},
+	{ party_id: 5, value_id: 3, position: -1},
+	{ party_id: 5, value_id: 4, position: -1},
+	{ party_id: 5, value_id: 5, position: 1},
+	{ party_id: 5, value_id: 6, position: nil},
+	{ party_id: 5, value_id: 7, position: nil},
+	#Vihreät
+	{ party_id: 6, value_id: 1, position: -1},
+	{ party_id: 6, value_id: 2, position: 1},
+	{ party_id: 6, value_id: 3, position: -1},
+	{ party_id: 6, value_id: 4, position: -1},
+	{ party_id: 6, value_id: 5, position: 1},
+	{ party_id: 6, value_id: 6, position: 1},
+	{ party_id: 6, value_id: 7, position: -1},
+	#KD
+	{ party_id: 7, value_id: 1, position: 0},
+	{ party_id: 7, value_id: 2, position: 1},
+	{ party_id: 7, value_id: 3, position: 1},
+	{ party_id: 7, value_id: 4, position: 1},
+	{ party_id: 7, value_id: 5, position: 1},
+	{ party_id: 7, value_id: 6, position: nil},
+	{ party_id: 7, value_id: 7, position: nil},
+	#RKP
+	{ party_id: 8, value_id: 1, position: 1},
+	{ party_id: 8, value_id: 2, position: 1},
+	{ party_id: 8, value_id: 3, position: -1},
+	{ party_id: 8, value_id: 4, position: 1},
+	{ party_id: 8, value_id: 5, position: 1},
+	{ party_id: 8, value_id: 6, position: nil},
+	{ party_id: 8, value_id: 7, position: nil}
 ])

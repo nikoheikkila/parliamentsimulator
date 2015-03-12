@@ -1,41 +1,10 @@
-<p id="notice"><%= notice %></p>
-<table>
-  <thead>
-    <tr>
-      <% @parties.each do |party| %>
-        <th>
-          <center><%= party.name %></center> 
-          <br> 
-          <%= image_tag party.picture, height: '150', width: '150' %>
-        </th>
-    <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
+<p class="lead warning" id="notice"><%= notice %></p>
+
+<div class="row">
     <% @parties.each do |party| %>
-      <td style="border: 1px solid black; height: 10px; margin: 5px, 0px;">Arvo 1</td>
+        <div class="col-md-2 col-xs-2">
+            <p><span class="center"><strong><%= party.name %></strong></span></p>
+            <%= image_tag party.picture, class: 'img-responsive', alt: party.name %>
+        </div>
     <% end %>
-    </tr>
-    <tr>
-    <% @parties.each do |party| %>
-      <td style="border: 1px solid black; height: 10px; margin: 5px, 0px;">Arvo 2</td>
-    <% end %>
-    </tr>
-    <tr>
-    <% @parties.each do |party| %>
-      <td style="border: 1px solid black; height: 10px; margin: 5px, 0px;">Arvo 3</td>
-    <% end %>
-    </tr>
-    <tr>
-    <% @parties.each do |party| %>
-      <td style="border: 1px solid black; height: 10px; margin: 5px, 0px;">Arvo 4</td>
-    <% end %>
-    </tr>
-    <tr>
-    <% @parties.each do |party| %>
-      <td style="border: 1px solid black; height: 10px; margin: 5px, 0px;">Arvo 5</td>
-    <% end %>
-    </tr>
-  </tbody>
-</table>
+</div>

@@ -1,10 +1,40 @@
-<p class="lead warning" id="notice"><%= notice %></p>
+<div class="row">
+    <div class="col-md-6 col-xs-6">
+        <p class="lead warning" id="notice"><%= notice %></p>
+    </div>
+</div>
+
 
 <div class="row">
     <% @parties.each do |party| %>
         <div class="col-md-2 col-xs-2">
-            <p><span class="center"><strong><%= party.name %></strong></span></p>
+            <p class="text-center"><strong><%= party.name %></strong></p>
             <%= image_tag party.picture, class: 'img-responsive', alt: party.name %>
+            <p class="scoreValue h1 text-center">
+                0
+            </p>
         </div>
     <% end %>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-md-4 col-xs-4">
+        <button id="startGame" class="btn btn-success">Aloita peli</button>
+        <button id="resetGame" class="btn btn-danger">Nollaa peli</button>
+        <hr>
+        <div class="alert alert-danger">
+            <p><strong>Aika</strong> <span class="timerValue">00:00</span></p>
+        </div>
+    </div>
+    <div class="col-md-8 col-xs-8">
+        <ul class="list-unstyled list-inline">
+            <% for i in 1..10 do %>
+                <li class="h4">
+                    <%= "Arvo #{i}" %>
+                </li>
+            <% end %>
+        </ul>
+    </div>
 </div>

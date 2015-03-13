@@ -10,6 +10,13 @@
         <div class="col-md-2 col-xs-2">
             <p class="text-center"><strong><%= party.name %></strong></p>
             <%= image_tag party.picture, class: 'img-responsive', alt: party.name %>
+            <% @pairings.each do |pairing| %>
+                <% if party.id == pairing.party_id %>
+                    <%= Value.find(pairing.value_id).name %>
+                    <%= pairing.position %>
+                    <br>
+                <% end %>
+            <% end %>
             <p class="scoreValue h1 text-center">
                 0
             </p>

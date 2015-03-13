@@ -5,6 +5,8 @@ class PartiesController < ApplicationController
   # GET /parties.json
   def index
     @parties = Party.all
+    @values = Value.all
+    @pairings = Pairing.all
   end
 
   # GET /parties/1

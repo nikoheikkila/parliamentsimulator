@@ -12,9 +12,10 @@
             <%= image_tag party.picture, class: 'img-responsive', alt: party.name %>
             <% @pairings.each do |pairing| %>
                 <% if party.id == pairing.party_id %>
-                    <%= Value.find(pairing.value_id).name %>
-                    <%= pairing.position %>
-                    <br>
+                    <div class="pairing hidden">
+                        <span data-pairingName="<%= Value.find(pairing.value_id).name %>"></span>
+                        <span data-pairingPosition="<%= pairing.position %>"></span>
+                    </div>
                 <% end %>
             <% end %>
             <p class="scoreValue h1 text-center">

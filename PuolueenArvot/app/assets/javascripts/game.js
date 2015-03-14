@@ -1,15 +1,48 @@
 $(document).ready(function () {
 
+    /**
+     * Constants
+     */
+    var pValues = $('.value');
+    var parties = $('.party');
+
+    /**
+     * Event listeners
+     */
+
+    /**
+     * Init function setups the game and necessary elements.
+     */
     var init = function () {
 
         console.log("Initializing game...");
-        // All setup logic here, eg. timer initialization
+
+        if (pValues.length > 0) {
+
+            pValues.draggable();
+            parties.droppable({
+                drop: valueDropped
+            });
+
+        } else {
+
+            console.log("No values set!");
+        }
 
     };
 
-    function dropped(element) {
+    /**
+     * Call when value is dropped on party image
+     */
+    var valueDropped = function(event, ui) {
 
-        // Call when value is dropped on party image
+        var value = ui.draggable.data('value');
+
+        if (partyAgreesWith(value))
+            changeScore(1);
+        else
+            changeScore(-1);
+
         return false;
     };
 
@@ -28,13 +61,14 @@ $(document).ready(function () {
     function changeScore(points) {
 
         // Increase or decrease scores
+        console.log("Your score is now: " + points);
         return false;
     };
 
     try {
         init();
     } catch (err) {
-        console.log("Error occured: " + err)
+        console.log("Setup failed. Reason: " + err);
     }
 
 });

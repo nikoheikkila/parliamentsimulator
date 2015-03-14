@@ -7,7 +7,7 @@
 
 <div class="row">
     <% @parties.each do |party| %>
-        <div class="col-md-2 col-xs-2">
+        <div class="col-md-2 col-xs-2 party">
             <p class="text-center"><strong><%= party.name %></strong></p>
             <%= image_tag party.picture, class: 'img-responsive', alt: party.name %>
             <% @pairings.each do |pairing| %>
@@ -39,7 +39,7 @@
     <div class="col-md-8 col-xs-8">
         <ul class="list-unstyled list-inline">
             <% for i in 1..10 do %>
-                <li class="h4">
+                <li class="value h4" data-value="<%= i %>">
                     <%= "Arvo #{i}" %>
                 </li>
             <% end %>

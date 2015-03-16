@@ -157,6 +157,9 @@ $(document).ready(function () {
     var timeOut = function () {
 
         // End game and display something nice
+        var x = alert("Peli ohi! Pisteet:" + score);
+        if (x)
+            location.reload();
         return false;
     };
 

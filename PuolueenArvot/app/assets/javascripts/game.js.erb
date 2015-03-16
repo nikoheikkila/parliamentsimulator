@@ -3,119 +3,175 @@ $(document).ready(function () {
     /**
      * Constants
      */
+
     var parties = $('.party');
-    var valuesList = <%= Value.all.to_json %>
+    var valuesList = <%= Value.all.to_json %>   // JSON data from Rails app
     var pairings = <%= Pairing.all.to_json %>;
-    var score = 0;
-    var timer = 0;
-    var peliKay = setInterval(function(){updateArvot()}, 5000);
+    var score = timer = 0;
+    var updateInterval = 5000;
+
     /**
      * Event listeners
      */
+
+    /* Starting the game */
+    $('#startGame').on('click', function(e) {
+
+        e.preventDefault();
+        console.info("Launching game. Good luck!");
+
+        try {
+            init();
+        } catch (err) {
+            console.error("init() failed. Reason: " + err);
+        }
+
+        gameLoop = setInterval(function () {
+            updateValues()
+        }, updateInterval);
+
+        return false;
+    });
+
+    /* Resetting the game */
+    $('#resetGame').on('click', function(e) {
+
+        e.preventDefault();
+
+        if (confirm("This will reset game. Are you sure?")) {
+            console.info("Resetting game.");
+            clearInterval(gameLoop);
+        }
+
+        return false;
+    });
 
     /**
      * Init function setups the game and necessary elements.
      */
 
     var randomValuePosition = function() {
+
+        /* Generate random number from 1..55 */
         var num = Math.floor((Math.random() * 56));
-        return {name: valuesList[pairings[num].value_id-1].name, id: pairings[num].value_id, position: pairings[num].position};
-    }
+        var randObj = {
+            name: valuesList[pairings[num].value_id-1].name,
+            id: pairings[num].value_id,
+            position: pairings[num].position
+        };
+
+        return randObj;
+    };
 
     var init = function () {
 
-        console.log("Initializing game...");
-        aloitusArvot();
+        console.info("Initializing game...");
+
+        initialValues();
+
         var pValues = $('.value');
+
         if (pValues.length > 0) {
             pValues.draggable();
             parties.droppable({
                 drop: valueDropped
             });
-
         } else {
-
-            console.log("No values set!");
+            console.warn("No values set!");
         }
-
     };
 
-    var updateArvot = function () {
-        arvoKehiin(randomValuePosition());
+    var updateValues = function () {
+
+        generateNewValues(randomValuePosition());
         $('.value').draggable();
-    }
-    var aloitusArvot = function () {
-        for (var i = 0; i < 10; i++) {
-            arvoKehiin(randomValuePosition());
-        };
+    };
+
+    var initialValues = function (n) {
+
+        var amount = n || 10;
+
+        for (var i = 0; i < amount; i++)
+            generateNewValues(randomValuePosition());
     }
 
-    var arvoKehiin = function (sisalto) {
-        var x = "";
-        var icon = "";
-        if(sisalto.position == 1){
-            x = "right";
-            icon = "fa-thumbs-up";
+    var generateNewValues = function (content) {
+
+        var x = icon = '';
+
+        if (content.position == 1) {
+            x = 'right';
+            icon = 'fa-thumbs-up';
+        } else if (content.position == -1) {
+            x = 'wrong';
+            icon = 'fa-thumbs-down';
         }
-        else if(sisalto.position == -1){
-            x = "wrong";
-            icon = "fa-thumbs-down";
-        }
-        var pArvot = $('.arvot')
-            .append($('<li></li>')
-                .addClass("value " + x)
-                .attr("data-id", sisalto.id)
-                .attr("data-position", String(sisalto.position))
-                .text(sisalto.name + " " + sisalto.position));
-    }
+
+        var pValues = $('.arvot')
+            .append('<li> ' + content.name + '</li>')
+
+        pValues.find('li')
+            .addClass("value " + x + " fa " + icon)
+            .attr("data-id", content.id)
+            .attr("data-position", String(content.position));
+    };
+
     /**
      * Call when value is dropped on party image
      */
+
     var valueDropped = function(event, ui) {
-        var party_id = event.target.id;
-        var value_id = ui.draggable.data("id");
-        var value_position = ui.draggable.data("position");
-        if (partyAgreesWith(value_id,party_id,value_position)){
-            changeScore(1);
-            ui.draggable.remove();
-        }
-        else{
-            changeScore(-1);
-            ui.draggable.remove();
-            updateArvot();
-            updateArvot();
+
+        if (typeof event !== 'undefined' && typeof ui !== 'undefined') {
+
+            var party_id = event.target.id;
+            var value_id = ui.draggable.data("id");
+            var value_position = ui.draggable.data("position");
+
+            if (partyAgreesWith(value_id, party_id, value_position)) {
+                changeScore(1);
+                ui.draggable.remove();
+            }
+            else {
+                changeScore(-1);
+                ui.draggable.remove();
+                updateValues();
+            }
         }
     };
 
-    function partyAgreesWith(value_id, party_id, position) {
-        console.log(value_id + " " + party_id + " " + position);
-        for(var i = 0; i < pairings.length; i++){
-            if (pairings[i].value_id == value_id && pairings[i].party_id == party_id && pairings[i].position == position){
-                console.log(value_id);
-                return true;
+    var partyAgreesWith = function (value_id, party_id, position) {
+
+        for (var i = 0; i < pairings.length; i++) {
+
+            if (pairings[i].value_id == value_id
+                && pairings[i].party_id == party_id
+                && pairings[i].position == position) {
+                    return true;
             }
         }
+
         return false;
     };
 
-    function timeOut() {
+    var timeOut = function () {
 
         // End game and display something nice
         return false;
     };
 
-    function changeScore(points) {
+    var changeScore = function (points) {
 
-        // Increase or decrease scores
-        score = score + points;
-        $('#score').text(score);
-        return false;
+        if (points !== 0) {
+
+            var score = $('#score');
+            var currentPoints = score.data('points');
+
+            currentPoints += points;
+
+            score.text(currentPoints).data('points', currentPoints);
+        }
+
     };
-
-    try {
-        init();
-    } catch (err) {
-        console.log("Setup failed. Reason: " + err);
-    }
 
 });

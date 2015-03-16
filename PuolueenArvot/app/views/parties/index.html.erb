@@ -17,18 +17,19 @@
 <hr>
 
 <div class="row">
-    <div class="col-md-4 col-xs-4">
-        <button id="startGame" class="btn btn-success">Aloita peli</button>
-        <button id="resetGame" class="btn btn-danger">Nollaa peli</button>
-        <hr>
+    <div class="col-md-5 col-xs-5">
+        <button id="startGame" class="btn btn-success">
+            <i class="fa fa-play"></i> Aloita peli
+        </button>
+        <button id="resetGame" class="btn btn-danger">
+            <i class="fa fa-stop"></i> Nollaa peli
+        </button>
         <div class="alert alert-danger">
             <p><strong>Aika</strong> <span class="timerValue">00:00</span></p>
         </div>
-        <div id="score">
-            0
-        </div>
+        <div id="score" data-points="0">0</div>
     </div>
-    <div class="col-md-8 col-xs-8">
+    <div class="col-md-7 col-xs-7">
         <ul class="list-unstyled list-inline arvot">
         </ul>
     </div>

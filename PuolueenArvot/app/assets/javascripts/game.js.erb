@@ -7,7 +7,7 @@ $(document).ready(function () {
     var parties = $('.party');
     var valuesList = <%= Value.all.to_json %>   // JSON data from Rails app
     var pairings = <%= Pairing.all.to_json %>;
-    var score = timer = 0;
+    var score = timer = xyz = 0;
     var updateInterval = 7000;
 
     /**
@@ -86,11 +86,18 @@ $(document).ready(function () {
     };
 
     var updateValues = function () {
-
+        xyz++;
         if ($('.value').length < 10) {
             generateNewValues(randomValuePosition());
             $('.value').draggable();
+        } else {
+            gameOver();
         }
+        if(xyz%5==0)
+            updateInterval = updateInterval * 0.8;
+        gameLoop = setInterval(function () {
+            updateValues()
+        }, updateInterval);
     };
 
     var initialValues = function (n) {
@@ -134,12 +141,8 @@ $(document).ready(function () {
             var value_id = ui.draggable.data("id");
             var value_position = ui.draggable.data("position");
             var newScore = 0;
-
             if (partyAgreesWith(value_id, party_id, value_position)) {
                 newScore++;
-
-                if ($('.value').length == 0)
-                    gameOver();
             }
             else {
                 newScore--;

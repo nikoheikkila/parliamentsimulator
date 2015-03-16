@@ -6,7 +6,9 @@ $(document).ready(function () {
     var parties = $('.party');
     var valuesList = <%= Value.all.to_json %>
     var pairings = <%= Pairing.all.to_json %>;
-
+    var score = 0;
+    var timer = 0;
+    var peliKay = setInterval(function(){updateArvot()}, 5000);
     /**
      * Event listeners
      */
@@ -26,7 +28,6 @@ $(document).ready(function () {
         aloitusArvot();
         var pValues = $('.value');
         if (pValues.length > 0) {
-
             pValues.draggable();
             parties.droppable({
                 drop: valueDropped
@@ -38,6 +39,11 @@ $(document).ready(function () {
         }
 
     };
+
+    var updateArvot = function () {
+        arvoKehiin(randomValuePosition());
+        $('.value').draggable();
+    }
     var aloitusArvot = function () {
         for (var i = 0; i < 10; i++) {
             arvoKehiin(randomValuePosition());
@@ -45,9 +51,19 @@ $(document).ready(function () {
     }
 
     var arvoKehiin = function (sisalto) {
+        var x = "";
+        var icon = "";
+        if(sisalto.position == 1){
+            x = "right";
+            icon = "fa-thumbs-up";
+        }
+        else if(sisalto.position == -1){
+            x = "wrong";
+            icon = "fa-thumbs-down";
+        }
         var pArvot = $('.arvot')
             .append($('<li></li>')
-                .addClass("value")
+                .addClass("value " + x)
                 .attr("data-id", sisalto.id)
                 .attr("data-position", String(sisalto.position))
                 .text(sisalto.name + " " + sisalto.position));
@@ -59,10 +75,16 @@ $(document).ready(function () {
         var party_id = event.target.id;
         var value_id = ui.draggable.data("id");
         var value_position = ui.draggable.data("position");
-        if (partyAgreesWith(value_id,party_id,value_position))
+        if (partyAgreesWith(value_id,party_id,value_position)){
             changeScore(1);
-        else
+            ui.draggable.remove();
+        }
+        else{
             changeScore(-1);
+            ui.draggable.remove();
+            updateArvot();
+            updateArvot();
+        }
     };
 
     function partyAgreesWith(value_id, party_id, position) {
@@ -85,7 +107,8 @@ $(document).ready(function () {
     function changeScore(points) {
 
         // Increase or decrease scores
-        $('#score').text(points);
+        score = score + points;
+        $('#score').text(score);
         return false;
     };
 

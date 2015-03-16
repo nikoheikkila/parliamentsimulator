@@ -20,6 +20,9 @@ $(document).ready(function () {
         e.preventDefault();
         console.info("Launching game. Good luck!");
 
+        $(this).attr('disabled', true);
+        $('#resetGame').attr('disabled', false);
+
         try {
             init();
         } catch (err) {
@@ -38,9 +41,10 @@ $(document).ready(function () {
 
         e.preventDefault();
 
-        if (confirm("This will reset game. Are you sure?")) {
+        if (confirm("Tämä nollaa pelin. Oletko varma?")) {
             console.info("Resetting game.");
             clearInterval(gameLoop);
+            window.location.reload();
         }
 
         return false;
@@ -89,7 +93,7 @@ $(document).ready(function () {
 
     var initialValues = function (n) {
 
-        var amount = n || 10;
+        var amount = n || 3;
 
         for (var i = 0; i < amount; i++)
             generateNewValues(randomValuePosition());

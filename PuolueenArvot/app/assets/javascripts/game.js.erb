@@ -8,7 +8,7 @@ $(document).ready(function () {
     var valuesList = <%= Value.all.to_json %>   // JSON data from Rails app
     var pairings = <%= Pairing.all.to_json %>;
     var score = timer = 0;
-    var updateInterval = 5000;
+    var updateInterval = 7000;
 
     /**
      * Event listeners
@@ -137,6 +137,9 @@ $(document).ready(function () {
 
             if (partyAgreesWith(value_id, party_id, value_position)) {
                 newScore++;
+
+                if ($('.value').length == 0)
+                    gameOver();
             }
             else {
                 newScore--;

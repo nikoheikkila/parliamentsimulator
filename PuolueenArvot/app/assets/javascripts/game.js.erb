@@ -154,13 +154,20 @@ $(document).ready(function () {
         return false;
     };
 
-    var timeOut = function () {
+    var gameOver = function () {
 
-        // End game and display something nice
-        var x = alert("Peli ohi! Pisteet:" + score);
-        if (x)
-            location.reload();
-        return false;
+        var gameOverScreen = $('#gameOver');
+
+        gameOverScreen.on('hide.bs.modal', function() {
+            window.location.reload();
+        });
+
+        /* End game and display a nice modal */
+        gameOverScreen.modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+
     };
 
     var changeScore = function (points) {

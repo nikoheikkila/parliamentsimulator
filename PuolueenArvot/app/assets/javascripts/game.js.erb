@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     var randomValuePosition = function() {
         var num = Math.floor((Math.random() * 56));
-        return valuesList[pairings[num].value_id-1].name + " " + pairings[num].position;
+        return {name: valuesList[pairings[num].value_id-1].name, id: pairings[num].value_id, position: pairings[num].position};
     }
 
     var init = function () {
@@ -48,26 +48,31 @@ $(document).ready(function () {
         var pArvot = $('.arvot')
             .append($('<li></li>')
                 .addClass("value")
-                .text(sisalto));
+                .attr("data-id", sisalto.id)
+                .attr("data-position", String(sisalto.position))
+                .text(sisalto.name + " " + sisalto.position));
     }
     /**
      * Call when value is dropped on party image
      */
     var valueDropped = function(event, ui) {
-
-        var value = ui.draggable.data('value');
-
-        if (partyAgreesWith(value))
+        var party_id = event.target.id;
+        var value_id = ui.draggable.data("id");
+        var value_position = ui.draggable.data("position");
+        if (partyAgreesWith(value_id,party_id,value_position))
             changeScore(1);
         else
             changeScore(-1);
-
-        return false;
     };
 
-    function partyAgreesWith(value) {
-
-        // Call to check if party agrees with given value
+    function partyAgreesWith(value_id, party_id, position) {
+        console.log(value_id + " " + party_id + " " + position);
+        for(var i = 0; i < pairings.length; i++){
+            if (pairings[i].value_id == value_id && pairings[i].party_id == party_id && pairings[i].position == position){
+                console.log(value_id);
+                return true;
+            }
+        }
         return false;
     };
 
@@ -80,7 +85,7 @@ $(document).ready(function () {
     function changeScore(points) {
 
         // Increase or decrease scores
-        console.log("Your score is now: " + points);
+        $('#score').text(points);
         return false;
     };
 

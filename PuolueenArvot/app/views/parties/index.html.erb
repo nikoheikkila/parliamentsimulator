@@ -7,20 +7,9 @@
 
 <div class="row">
     <% @parties.each do |party| %>
-        <div class="col-md-2 col-xs-2 party">
+        <div class="col-md-2 col-xs-2 party" id="<%= party.id %>">
             <p class="text-center"><strong><%= party.name %></strong></p>
             <%= image_tag party.picture, class: 'img-responsive', alt: party.name %>
-            <% @pairings.each do |pairing| %>
-                <% if party.id == pairing.party_id %>
-                    <div class="pairing hidden">
-                        <span data-pairingName="<%= Value.find(pairing.value_id).name %>"></span>
-                        <span data-pairingPosition="<%= pairing.position %>"></span>
-                    </div>
-                <% end %>
-            <% end %>
-            <p class="scoreValue h1 text-center">
-                0
-            </p>
         </div>
     <% end %>
 </div>
@@ -34,6 +23,9 @@
         <hr>
         <div class="alert alert-danger">
             <p><strong>Aika</strong> <span class="timerValue">00:00</span></p>
+        </div>
+        <div id="score">
+            0
         </div>
     </div>
     <div class="col-md-8 col-xs-8">

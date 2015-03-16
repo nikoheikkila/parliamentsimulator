@@ -1,5 +1,16 @@
 class PartiesController < ApplicationController
   before_action :set_party, only: [:show, :edit, :update, :destroy]
+  helper_method :partyAgreesWith
+
+  def partyAgreesWith(party_id, value_id, position)
+    @pairings = Pairing.all
+    @pairings.each do |pairing|
+      if pairing.party_id == party_id and pairing.value_id == value_id and pairing.position == position
+        true
+      end
+    end
+    false
+  end
 
   # GET /parties
   # GET /parties.json
@@ -11,6 +22,7 @@ class PartiesController < ApplicationController
 
   # GET /parties/1
   # GET /parties/1.json
+
   def show
   end
 

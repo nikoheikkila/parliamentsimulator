@@ -1,0 +1,93 @@
+$(document).ready(function () {
+
+    /**
+     * Constants
+     */
+    var parties = $('.party');
+    var valuesList = <%= Value.all.to_json %>
+    var pairings = <%= Pairing.all.to_json %>;
+
+    /**
+     * Event listeners
+     */
+
+    /**
+     * Init function setups the game and necessary elements.
+     */
+
+    var randomValuePosition = function() {
+        var num = Math.floor((Math.random() * 56));
+        return valuesList[pairings[num].value_id-1].name + " " + pairings[num].position;
+    }
+
+    var init = function () {
+
+        console.log("Initializing game...");
+        aloitusArvot();
+        var pValues = $('.value');
+        if (pValues.length > 0) {
+
+            pValues.draggable();
+            parties.droppable({
+                drop: valueDropped
+            });
+
+        } else {
+
+            console.log("No values set!");
+        }
+
+    };
+    var aloitusArvot = function () {
+        for (var i = 0; i < 10; i++) {
+            arvoKehiin(randomValuePosition());
+        };
+    }
+
+    var arvoKehiin = function (sisalto) {
+        var pArvot = $('.arvot')
+            .append($('<li></li>')
+                .addClass("value")
+                .text(sisalto));
+    }
+    /**
+     * Call when value is dropped on party image
+     */
+    var valueDropped = function(event, ui) {
+
+        var value = ui.draggable.data('value');
+
+        if (partyAgreesWith(value))
+            changeScore(1);
+        else
+            changeScore(-1);
+
+        return false;
+    };
+
+    function partyAgreesWith(value) {
+
+        // Call to check if party agrees with given value
+        return false;
+    };
+
+    function timeOut() {
+
+        // End game and display something nice
+        return false;
+    };
+
+    function changeScore(points) {
+
+        // Increase or decrease scores
+        console.log("Your score is now: " + points);
+        return false;
+    };
+
+    try {
+        init();
+    } catch (err) {
+        console.log("Setup failed. Reason: " + err);
+    }
+
+});

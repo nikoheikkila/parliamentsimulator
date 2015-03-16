@@ -87,8 +87,10 @@ $(document).ready(function () {
 
     var updateValues = function () {
 
-        generateNewValues(randomValuePosition());
-        $('.value').draggable();
+        if ($('.value').length < 10) {
+            generateNewValues(randomValuePosition());
+            $('.value').draggable();
+        }
     };
 
     var initialValues = function (n) {
@@ -131,16 +133,18 @@ $(document).ready(function () {
             var party_id = event.target.id;
             var value_id = ui.draggable.data("id");
             var value_position = ui.draggable.data("position");
+            var newScore = 0;
 
             if (partyAgreesWith(value_id, party_id, value_position)) {
-                changeScore(1);
-                ui.draggable.remove();
+                newScore++;
             }
             else {
-                changeScore(-1);
-                ui.draggable.remove();
+                newScore--;
                 updateValues();
             }
+
+            ui.draggable.remove();
+            changeScore(newScore);
         }
     };
 

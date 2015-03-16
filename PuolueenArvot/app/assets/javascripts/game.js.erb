@@ -110,7 +110,7 @@ $(document).ready(function () {
         var pValues = $('.arvot')
             .append('<li> ' + content.name + '</li>')
 
-        pValues.find('li')
+        pValues.find('li').last()
             .addClass("value " + x + " fa " + icon)
             .attr("data-id", content.id)
             .attr("data-position", String(content.position));

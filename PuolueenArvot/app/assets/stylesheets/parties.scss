@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.highlight {
+    border-radius: 100%;
+    background-color: #f6e60b;
+    background-image: -webkit-linear-gradient(top, #f6e60b, #fcf7af);
+    background-image:         linear-gradient(to bottom, #f6e60b, #fcf7af);
+}
+
 li.value {
     background-color: #4AD;
     color: #FFF;

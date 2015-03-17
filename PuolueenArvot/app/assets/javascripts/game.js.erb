@@ -79,7 +79,8 @@ $(document).ready(function () {
         if (pValues.length > 0) {
             pValues.draggable();
             parties.droppable({
-                drop: valueDropped
+                drop: valueDropped,
+                hoverClass: 'highlight'
             });
         } else {
             console.warn("No values set!");

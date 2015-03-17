@@ -171,7 +171,8 @@ $(document).ready(function () {
     var gameOver = function () {
 
         var gameOverScreen = $('#gameOver');
-
+        var score = $('#score').data('points');
+        $('#finalscore').text(score);
         gameOverScreen.on('hide.bs.modal', function() {
             window.location.reload();
         });

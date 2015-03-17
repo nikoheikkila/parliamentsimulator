@@ -7,8 +7,7 @@
 
 <div class="row">
     <% @parties.each do |party| %>
-        <div class="col-md-2 col-xs-2 party" id="<%= party.id %>">
-            <p class="text-center"><strong><%= party.name %></strong></p>
+        <div class="col-md-1 col-xs-1 party" id="<%= party.id %>">
             <%= image_tag party.picture, class: 'img-responsive', alt: party.name %>
         </div>
     <% end %>

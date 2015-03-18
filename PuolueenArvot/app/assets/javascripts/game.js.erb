@@ -23,6 +23,7 @@ $(document).ready(function () {
     $('#startGame').on('click', function(e) {
 
         e.preventDefault();
+
         console.info("Launching game. Good luck!");
 
         $(this).attr('disabled', true);
@@ -53,6 +54,13 @@ $(document).ready(function () {
         }
 
         return false;
+    });
+
+    $('#showHelp').on('click', function(e) {
+
+        e.preventDefault();
+
+        $('#helpText').modal();
     });
 
     var randomValuePosition = function() {

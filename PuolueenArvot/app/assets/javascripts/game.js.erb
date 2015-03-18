@@ -9,7 +9,11 @@ $(document).ready(function () {
     var pairings = <%= Pairing.all.to_json %>;
     var score = timer = t = 0;
     var updateInterval = 7000;
+    var highscore = localStorage['highscore'] || 0;
     var gameLoop;
+
+    /* Display high score */
+    $('#highScore > span').text(highscore);
 
     /**
      * Event listeners
@@ -51,10 +55,6 @@ $(document).ready(function () {
         return false;
     });
 
-    /**
-     * Init function setups the game and necessary elements.
-     */
-
     var randomValuePosition = function() {
 
         /* Generate random number from 1..55 */
@@ -67,6 +67,10 @@ $(document).ready(function () {
 
         return randObj;
     };
+
+    /**
+     * Init function setups the game and necessary elements.
+     */
 
     var init = function () {
 
@@ -190,6 +194,9 @@ $(document).ready(function () {
             keyboard: false
         });
 
+        /* Save high score to HTML5 Local Storage */
+        if (typeof localStorage !== 'undefined' && score > highscore)
+                localStorage['highscore'] = score;
     };
 
     var changeScore = function (points) {
@@ -201,7 +208,8 @@ $(document).ready(function () {
 
             currentPoints += points;
 
-            score.text(currentPoints).data('points', currentPoints);
+            score.find('span').text(currentPoints);
+            score.data('points', currentPoints);
         }
 
     };

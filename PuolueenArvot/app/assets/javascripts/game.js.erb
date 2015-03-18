@@ -7,7 +7,7 @@ $(document).ready(function () {
     var parties = $('.party');
     var valuesList = <%= Value.all.to_json %>   // JSON data from Rails app
     var pairings = <%= Pairing.all.to_json %>;
-    var score = timer = xyz = 0;
+    var score = timer = t = 0;
     var updateInterval = 7000;
     var gameLoop;
 
@@ -88,15 +88,19 @@ $(document).ready(function () {
     };
 
     var updateValues = function () {
-        xyz++;
+
+        t++;
+
         if ($('.value').length < 10) {
             generateNewValues(randomValuePosition());
             $('.value').draggable();
         } else {
             gameOver();
         }
-        if(xyz%5==0)
+
+        if (t % 5 === 0)
             updateInterval = updateInterval * 0.5;
+
         clearInterval(gameLoop);
         gameLoop = setInterval(function () {
             updateValues()
@@ -175,7 +179,7 @@ $(document).ready(function () {
 
         var gameOverScreen = $('#gameOver');
         var score = $('#score').data('points');
-        $('#finalscore').text("Pisteet:" + score);
+        $('#finalscore').text("Pisteet: " + score);
         gameOverScreen.on('hide.bs.modal', function() {
             window.location.reload();
         });
